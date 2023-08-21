@@ -1,7 +1,7 @@
 def zipPath = "C:\\Program Files\\7-Zip\\7z.exe"
 def packagePathPublish = "C:\\IT-VCBS\\DOTNET45Publish\\"
 def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\pipelineTest"
-def MSBUILD = "C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\"
+def MSBUILD = "C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\MSBuild.exe"
 
 node{		
 	stage("Checkout SCM"){
@@ -20,17 +20,17 @@ node{
 			echo 'clone success'
 	}
 	
-	/*stage ("Build soucecode"){
+	stage ("Build soucecode"){
 		bat """
-		${MSBUILD}MSBuild.exe ${workspace}\\DOTNET45\\DotNet4.5\\WebApplication1\\WebApplication1.csproj /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:DeleteExistingFiles=True /p:publishUrl=${packagePathService}
+		\"${MSBUILD}\" ${workspace}\\DOTNET45\\DotNet4.5\\WebApplication1\\WebApplication1.csproj /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:DeleteExistingFiles=True /p:publishUrl=${packagePathPublish}
 			"""
-	} */
+	}
 	
 	stage ("Zip file Publish"){
 		bat """
 		cd /d ${packagePathPublish}
 		dir
-		del /F webconfig
+		del /F web.config
 		\"${zipPath}\" a -r \"packagePathPublish"\
 		
 		"""
