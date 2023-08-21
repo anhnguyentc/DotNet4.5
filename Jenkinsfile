@@ -1,7 +1,7 @@
 def zipPath = "C:\\Program Files\\7-Zip\\7z.exe"
 def packagePathService = "C:\\IT-VCBS\\DOTNET45Publish\\"
 def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\pipelineTest"
-def MSBUILD = "%ProgramFiles(x86)%\\MSBuild\\MSBuild\\14.0\\Bin\\"
+def MSBUILD = "C:\\progra~2\\MSBuild\\MSBuild\\14.0\\Bin\\"
 
 node{		
 	stage("Checkout SCM"){
