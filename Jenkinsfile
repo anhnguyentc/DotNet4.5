@@ -1,6 +1,6 @@
 def zipPath = "C:\\Program Files\\7-Zip\\7z.exe"
 def packagePathService = "C:\\IT-VCBS\\DOTNET45Publish\\"
-def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\pipelineTest"
+def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\PipelineBonProject"
 def MSBUILD = "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\"
 
 node{		
