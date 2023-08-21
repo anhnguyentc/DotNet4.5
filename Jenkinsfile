@@ -1,7 +1,7 @@
 def zipPath = "C:\\Program Files\\7-Zip\\7z.exe"
-def packagePathService = "C:\\IT-VCBS\\BONPublish\\WEB\\"
-def workspace = "C:\\Jenkins\\workspace"
-def MSBUILD = "C:\\Jenkins\\lib\\MSBuild\\14.0\\Bin\\"
+def packagePathService = "C:\\IT-VCBS\\DOTNET45Publish\\"
+def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\pipelineTest"
+def MSBUILD = "C:\\Program Files (x86)\\MSBuild\\14.0\\Bin"
 
 node{		
 	stage("Checkout SCM"){
@@ -9,15 +9,21 @@ node{
 		checkout scm
 	}
 	
-	stage ("Checkout soucecode"){
+	stage ("Clone soucecode"){
 		bat """
-			git clone -b master https://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@github.com/anhnguyentc/his-dvcongqgia-application.git %cd%
-			if not exist \"%cd%\\BONPROJECT\\" mkdir %cd%\\BONPROJECT\\
-			cd %cd% \\BONPROJECT\\
-			git clone -b master https://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@github.com/anhnguyentc/his-dvcongqgia-application.git
+			git clone -b master https://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@github.com/anhnguyentc/DotNet4.5.git %cd%
+			if not exist \"%cd%\\DOTNET45\\" mkdir %cd%\\DOTNET45\\
+			cd %cd% \\DOTNET45\\
+			git clone -b master https://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@github.com/anhnguyentc/DotNet4.5.git
 			
 			"""
 			echo 'clone success'
 	}
+	
+	/*stage ("Build soucecode"){
+		bat """
+			${MSBUILD}msbuild 
+	
+	} */
 
 }
