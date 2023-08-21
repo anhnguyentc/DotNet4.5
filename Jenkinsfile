@@ -11,7 +11,8 @@ node{
 	
 	stage ("Clone soucecode"){
 		bat """
-			git clone -b master https://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@github.com/anhnguyentc/DotNet4.5.git %cd%
+			//git clone -b master https://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@github.com/anhnguyentc/DotNet4.5.git %cd%
+			cd /d C:/Jenkins
 			if not exist \"%cd%\\DOTNET45\\" mkdir %cd%\\DOTNET45\\
 			cd %cd% \\DOTNET45\\
 			git clone -b master https://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@github.com/anhnguyentc/DotNet4.5.git
@@ -22,7 +23,7 @@ node{
 	
 	stage ("Build soucecode"){
 		bat """
-		\"${MSBUILD}\" ${workspace}\\DOTNET45\\DotNet4.5\\WebApplication1\\WebApplication1.csproj /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:DeleteExistingFiles=True /p:publishUrl=${packagePathPublish}
+		${MSBUILD} C:\\Jenkins\\DOTNET45\\DotNet4.5\\WebApplication1\\WebApplication1.csproj /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:DeleteExistingFiles=True /p:publishUrl=${packagePathPublish}
 			"""
 	}
 	
