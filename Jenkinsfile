@@ -23,7 +23,8 @@ node{
 	
 	stage ("Build soucecode"){
 		bat """
-		${MSBUILD} C:\\Jenkins\\DOTNET45\\DotNet4.5\\WebApplication1\\WebApplication1.csproj /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:DeleteExistingFiles=True /p:publishUrl=${packagePathPublish}
+		cd /d C:/Jenkins/DOTNET45
+		${MSBUILD} C:\\Jenkins\\DOTNET45\\DotNet4.5\\WebApplication1.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:DeleteExistingFiles=True /p:publishUrl=${packagePathPublish}
 			"""
 	}
 	
