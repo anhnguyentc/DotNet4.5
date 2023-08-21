@@ -1,7 +1,7 @@
 def zipPath = "C:\\Program Files\\7-Zip\\7z.exe"
 def packagePathService = "C:\\IT-VCBS\\DOTNET45Publish\\"
 def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\pipelineTest"
-def MSBUILD = "\\C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\"
+def MSBUILD = "C:\\Jenkins\\MSBuild\\14.0\\Bin\\"
 
 node{		
 	stage("Checkout SCM"){
@@ -21,9 +21,9 @@ node{
 	}
 	
 	stage ("Build soucecode"){
-		bat 
-			"\ "${MSBUILD} msbuild.exe\" \\DOTNET45\\DotNet4.5\\WebApplication1.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:DeleteExistingFiles=True /p:publishUrl=${packagePathService}"
-			
+		bat """
+		${MSBUILD} msbuild.exe \\DOTNET45\\DotNet4.5\\WebApplication1.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:DeleteExistingFiles=True /p:publishUrl=${packagePathService}
+			"""
 	}
 
 }
