@@ -37,7 +37,7 @@ node{
 		bat """
 		cd /d ${packagePathPublish}
 		dir
-		
+		del /F web.config
 		\"${zipPath}\" a -r \"packagePathPublish"\
 		
 		"""
