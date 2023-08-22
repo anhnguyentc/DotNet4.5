@@ -2,6 +2,10 @@ def zipPath = "C:\\Program Files\\7-Zip\\7z.exe"
 def packagePathPublish = "C:\\IT-VCBS\\DOTNET45Publish\\"
 def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\pipelineTest"
 def MSBUILD = "\\MSBuild\\14.0\\Bin\\MSBuild.exe"
+def NEXUS_USER = "jenkins"
+def NEXUS_PASSWORD = "Nhim2023"
+def NEXUS_ADD =  "http://localhost:8081"
+def FILE_PUBLISH = "packagePathPublish.7z"
 
 node{		
 	stage("Checkout SCM"){
@@ -38,6 +42,14 @@ node{
 		
 		"""
 	
+	}
+	
+	stage ("push package to Nexus"){
+		bat """
+		cd /d ${packagePathPublish}
+		curl --upload-file ${FILE_PUBLISH} -u ${NEXUS_USER}:${NEXUS_PASSWORD} ${NEXUS_ADD}/repository/raw-it-vcbs-hosted/ -k
+		
+		"""		
 	}
 
 }
