@@ -15,7 +15,7 @@ node{
 		
 	stage ("Ping server"){
 		steps {				
-				ansiblePlaybook credentialsId: 'ansible-credentials', inventory: 'Ansible/inventory/production/group_vars/web_servers.yml', playbook: 'Ansible/playbooks/ping_server.yml.yml'
+				ansiblePlaybook credentialsId: 'ansible-credentials', inventory: 'Ansible/inventory/production/group_vars/web_servers.yml', playbook: 'Ansible/playbooks/ping_server.yml'
             }		
 	}
 
