@@ -14,7 +14,7 @@ node{
 	}
 		
 	stage ("Ping server"){		
-		ansiblePlaybook playbook: 'Ansible/playbooks/ping_server.yml'
+		ansiblePlaybook playbook: 'playbooks/ping_server.yml'
 	}
 
 }
