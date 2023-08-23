@@ -1,0 +1,6 @@
+---
+- name: Ping Server
+  hosts: {web_servers}
+  tasks:
+    - name: Ping the server webtrading
+      ping:

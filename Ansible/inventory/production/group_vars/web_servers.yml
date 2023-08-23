@@ -1,0 +1,7 @@
+[target_hosts]
+192.168.1.40
+
+[web_servers]
+192.168.1.40
+
+application_pool=["webtrading"]

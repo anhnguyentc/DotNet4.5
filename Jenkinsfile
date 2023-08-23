@@ -51,5 +51,12 @@ node{
 		
 		"""		
 	}
+	
+	stage ("push package to Nexus"){
+		bat """
+		ansible-playbook -i Ansible/playbooks/ping_server.yml
+		echo "Ping DC OK'
+		"""		
+	}
 
 }
