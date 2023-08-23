@@ -13,10 +13,8 @@ node{
 		checkout scm
 	}
 		
-	stage ("Ping server"){
-		steps {				
-				ansiblePlaybook playbook: 'Ansible/playbooks/ping_server.yml'
-            }		
+	stage ("Ping server"){		
+		ansiblePlaybook playbook: 'Ansible/playbooks/ping_server.yml'
 	}
 
 }
