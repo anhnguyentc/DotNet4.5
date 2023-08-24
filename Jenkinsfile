@@ -54,8 +54,8 @@ node{
 		
 }
 
-node ('jenkins-slave-linux') {
+/*node ('jenkins-slave-linux') {
 	stage ("Ping server"){	
 		echo "Ping server OK"
 	}
-} 
+} */
