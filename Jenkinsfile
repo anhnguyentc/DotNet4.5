@@ -6,7 +6,7 @@ def NEXUS_USER = "jenkins"
 def NEXUS_PASSWORD = "Nhim2023"
 def NEXUS_ADD =  "http://192.168.1.40:8081"
 def FILE_PUBLISH = "packagePathPublish.7z"
-def publishWebDir = "C:\\\Jenkins\\\webtrading"
+def publishWebDir = "C:\\Jenkins\\webtrading"
 
 node{		
 	stage("Checkout SCM"){
@@ -62,7 +62,7 @@ node{
     stage('Remote SSH') {
       sshCommand remote: remote, command: """
 	  cd /home/root/
-      sh test.sh ${publishWebDir} ${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH} ${NEXUS_USER} ${NEXUS_PASSWORD}
+      ansible-playbook -i inventory.ini --extra-vars "remote_dir='${publishWebDir}' nexus_url='${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH}' nexus_user='${NEXUS_USER}' nexus_password='${NEXUS_PASSWORD}'"  pull-file-nexus.yaml
 	  """
       //sshCommand remote: remote, command: "sh test.sh ${publishWebDir} ${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH} ${NEXUS_USER} ${NEXUS_PASSWORD}"
   }
