@@ -51,7 +51,12 @@ node{
 		
 		"""		
 	} */
-	//def remote_dir=
+	def ssh_command=''
+	def remote_dir = "remote_dir='C:\Jenkins\xxxxx\subfolder'"
+	def nexus_url = "nexus_url='http://192.168.1.40:8081/repository/raw-it-vcbs-hosted/packagePathPublish.7z'"
+	def nexus_user = "nexus_user='jenkins'"
+	def nexus_password = "nexus_password='Nhim2023'"
+	ssh_command = "ansible-playbook -i inventory.ini --extra-vars " + remote_dir + nexus_url + nexus_user + nexus_password
 	def remote = [:]
     remote.name = 'test'
     remote.host = '192.168.1.177'
@@ -59,9 +64,9 @@ node{
     remote.password = 'Nhim2023@'
     remote.allowAnyHosts = true
     stage('Remote SSH') {
-      sshCommand remote: remote, command: "pwd"
-      sshCommand remote: remote, command: "ansible-playbook -i inventory.ini --extra-vars "\"remote_dir='C:\Jenkins\xxxxx\subfolder' nexus_url='http://192.168.1.40:8081/repository/raw-it-vcbs-hosted/packagePathPublish.7z' nexus_user='jenkins' nexus_password='Nhim2023'"\"  pull-file-nexus.yaml"
-
+      //sshCommand remote: remote, command: "pwd"
+      //sshCommand remote: remote, command: "ansible-playbook -i inventory.ini --extra-vars "remote_dir='C:\Jenkins\xxxxx\subfolder' nexus_url='http://192.168.1.40:8081/repository/raw-it-vcbs-hosted/packagePathPublish.7z' nexus_user='jenkins' nexus_password='Nhim2023'"  pull-file-nexus.yaml"
+	  echo ssh_command
   }
 		
 }
