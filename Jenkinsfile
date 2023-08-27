@@ -61,9 +61,9 @@ node{
     stage('Remote SSH') {
       sshCommand remote: remote, command: """
 	  cd /home/root/
-      pwd
+      sh pull_file_nexus.sh
 	  """
-      sshCommand remote: remote, command: "sh pull_file_nexus.sh"
+      //sshCommand remote: remote, command: "sh pull_file_nexus.sh"
   }
 		
 }
