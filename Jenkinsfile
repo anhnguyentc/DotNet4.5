@@ -12,7 +12,7 @@ node{
 		cleanWs()
 		checkout scm
 	}
-	
+	/*
 	stage ("Clone soucecode"){
 		bat """
 			//git clone -b master https://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@github.com/anhnguyentc/DotNet4.5.git %cd%
@@ -50,15 +50,18 @@ node{
 		curl --upload-file ${FILE_PUBLISH} -u ${NEXUS_USER}:${NEXUS_PASSWORD} ${NEXUS_ADD}/repository/raw-it-vcbs-hosted/ -k
 		
 		"""		
-	}
+	} */
 	
-	stage ("SSH server linux"){
-		bat """
-		cd /d "C:\\Users\\Nguyen Hao\\.ssh"
-		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no jenkins@192.168.1.182 ls -a
-		
-		"""		
-	}
+	def remote = [:]
+    remote.name = 'test'
+    remote.host = '192.168.1.182'
+    remote.user = 'jenkins'
+    remote.password = 'Nhim2023@'
+    remote.allowAnyHosts = true
+    stage('Remote SSH') {
+      sshCommand remote: remote, command: "ls -lrt"
+      sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+  }
 		
 }
 
