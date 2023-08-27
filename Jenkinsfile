@@ -7,7 +7,7 @@ def NEXUS_PASSWORD = "Nhim2023"
 def NEXUS_ADD =  "http://192.168.1.40:8081"
 def today = new Date()
 def date = today.format("yyyyMMddHHmmss")
-def FILE_PUBLISH = 'webtrading_' + date	
+def FILE_PUBLISH = 'webtrading_' + date	+'.7z'
 def publishWebDir = "C:\\Jenkins\\webtrading"
 
 node{
