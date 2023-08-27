@@ -45,13 +45,13 @@ node{
 	
 	}
 	
-	stage ("push package to Nexus"){
+	stage ("Push package to Nexus"){
 		bat """
 		cd /d ${packagePathPublish}
 		curl --upload-file ${FILE_PUBLISH} -u ${NEXUS_USER}:${NEXUS_PASSWORD} ${NEXUS_ADD}/repository/raw-it-vcbs-hosted/ -k
 		
 		"""		
-	} */
+	} 
 	
 	def remote = [:]
     remote.name = 'test'
@@ -59,13 +59,25 @@ node{
     remote.user = 'root'
     remote.password = 'Nhim2023@'
     remote.allowAnyHosts = true
-    stage('Remote SSH') {
+    stage('Pull package from Nexus') {
       sshCommand remote: remote, command: """
 	  cd /home/root/
       ansible-playbook -i inventory.ini --extra-vars "remote_dir='${publishWebDir}' nexus_url='${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH}' nexus_user='${NEXUS_USER}' nexus_password='${NEXUS_PASSWORD}'"  pull-file-nexus.yaml
 	  """
       //sshCommand remote: remote, command: "sh test.sh ${publishWebDir} ${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH} ${NEXUS_USER} ${NEXUS_PASSWORD}"
-  }
+    }
+	
+	*/
+	
+	stage ("Unzip file Publish"){
+		bat """
+		cd /d ${publishWebDir}
+		dir
+		\"${zipPath}\" x ${FILE_PUBLISH}
+		
+		"""
+	
+	}
 		
 }
 
