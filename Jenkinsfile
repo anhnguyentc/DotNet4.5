@@ -24,7 +24,7 @@ node{
 		cleanWs()
 		checkout scm
 	}
-	/*
+	
 	stage ("Clone soucecode"){
 		bat """
 			//git clone -b master https://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@github.com/anhnguyentc/DotNet4.5.git %cd%
@@ -72,6 +72,13 @@ node{
       //sshCommand remote: remote, command: "sh test.sh ${publishWebDir} ${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH} ${NEXUS_USER} ${NEXUS_PASSWORD}"
     }	
 	
+	stage ("Stop Application"){
+		sshCommand remote: remote, command: """
+	    cd /home/root/
+        ansible-playbook -i inventory.ini iis_stop_application_pool.yaml
+	    """
+	}
+	
 	stage ("Unzip file Publish"){
 		bat """
 		cd /d ${publishWebDir}
@@ -79,12 +86,12 @@ node{
 		\"${unZipPath}\" x -o+ ${FILE_PUBLISH} \"${publishWebDir}\"
 		del ${FILE_PUBLISH}
 		"""	
-	} */
+	} 
 	
-	stage ("Deploy application"){
+	stage ("Start Application"){
 		sshCommand remote: remote, command: """
 	    cd /home/root/
-        ansible-playbook -i inventory.ini iis_stop_application_pool.yaml
+        ansible-playbook -i inventory.ini iis_start_application_pool.yaml
 	    """
 	}
 		
