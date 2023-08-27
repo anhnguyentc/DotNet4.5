@@ -5,15 +5,18 @@ def MSBUILD = "\\MSBuild\\14.0\\Bin\\MSBuild.exe"
 def NEXUS_USER = "jenkins"
 def NEXUS_PASSWORD = "Nhim2023"
 def NEXUS_ADD =  "http://192.168.1.40:8081"
-def FILE_PUBLISH = "packagePathPublish.7z"
+def today = new Date()
+def date = today.format("yyyyMMddHHmmss")
+def FILE_PUBLISH = 'webtrading_' + date	
 def publishWebDir = "C:\\Jenkins\\webtrading"
 
-node{		
+node{
+
 	stage("Checkout SCM"){
 		cleanWs()
 		checkout scm
 	}
-	/*
+	
 	stage ("Clone soucecode"){
 		bat """
 			//git clone -b master https://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@github.com/anhnguyentc/DotNet4.5.git %cd%
@@ -65,18 +68,15 @@ node{
       ansible-playbook -i inventory.ini --extra-vars "remote_dir='${publishWebDir}' nexus_url='${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH}' nexus_user='${NEXUS_USER}' nexus_password='${NEXUS_PASSWORD}'"  pull-file-nexus.yaml
 	  """
       //sshCommand remote: remote, command: "sh test.sh ${publishWebDir} ${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH} ${NEXUS_USER} ${NEXUS_PASSWORD}"
-    }
-	
-	*/
+    }	
 	
 	stage ("Unzip file Publish"){
 		bat """
 		cd /d ${publishWebDir}
 		dir
-		\"${zipPath}\" x ${FILE_PUBLISH}
-		
-		"""
-	
+		\"${zipPath}\" x ${FILE_PUBLISH} -ao
+		del ${FILE_PUBLISH}
+		"""	
 	}
 		
 }
