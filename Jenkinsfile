@@ -75,7 +75,6 @@ node{
 		cd /d ${publishWebDir}
 		dir
 		\"${zipPath}\" x ${FILE_PUBLISH} -o \"${publishWebDir}\" -y
-		del ${FILE_PUBLISH}
 		"""	
 	}
 		
