@@ -10,14 +10,21 @@ def today = new Date()
 def date = today.format("yyyyMMddHHmmss")
 def FILE_PUBLISH = 'webtrading_' + date	+'.7z'
 def publishWebDir = "C:\\Jenkins\\webtrading"
+def remote = [:]
 
 node{
+
+    remote.name = 'test'
+    remote.host = '192.168.1.177'
+    remote.user = 'root'
+    remote.password = 'Nhim2023@'
+    remote.allowAnyHosts = true
 
 	stage("Checkout SCM"){
 		cleanWs()
 		checkout scm
 	}
-	
+	/*
 	stage ("Clone soucecode"){
 		bat """
 			//git clone -b master https://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@github.com/anhnguyentc/DotNet4.5.git %cd%
@@ -56,13 +63,7 @@ node{
 		
 		"""		
 	} 
-	
-	def remote = [:]
-    remote.name = 'test'
-    remote.host = '192.168.1.177'
-    remote.user = 'root'
-    remote.password = 'Nhim2023@'
-    remote.allowAnyHosts = true
+
     stage('Pull package from Nexus') {
       sshCommand remote: remote, command: """
 	  cd /home/root/
@@ -76,7 +77,15 @@ node{
 		cd /d ${publishWebDir}
 		dir
 		\"${unZipPath}\" x -o+ ${FILE_PUBLISH} \"${publishWebDir}\"
+		del ${FILE_PUBLISH}
 		"""	
+	} */
+	
+	stage ("Deploy application"){
+		sshCommand remote: remote, command: """
+	    cd /home/root/
+        ansible-playbook -i inventory.ini iis_stop_application_pool.yaml
+	    """
 	}
 		
 }
