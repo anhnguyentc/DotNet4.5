@@ -42,7 +42,7 @@ node{
 		cd /d ${packagePathPublish}
 		dir
 		del /F web.config
-		\"${zipPath}\" a -r \"packagePathPublish"\
+		\"${zipPath}\" a -r ${FILE_PUBLISH}
 		
 		"""
 	
