@@ -51,6 +51,14 @@ node{
 		
 		"""		
 	}
+	
+	stage ("SSH server linux"){
+		bat """
+		cd /d "C:\\Users\\jenkins\\.ssh"
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no jenkins@192.168.1.182 ls -a
+		
+		"""		
+	}
 		
 }
 
