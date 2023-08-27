@@ -74,7 +74,7 @@ node{
 		bat """
 		cd /d ${publishWebDir}
 		dir
-		\"${zipPath}\" x ${FILE_PUBLISH} -ao
+		\"${zipPath}\" x ${FILE_PUBLISH}
 		del ${FILE_PUBLISH}
 		"""	
 	}
