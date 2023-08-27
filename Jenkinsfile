@@ -6,7 +6,7 @@ def NEXUS_USER = "jenkins"
 def NEXUS_PASSWORD = "Nhim2023"
 def NEXUS_ADD =  "http://192.168.1.40:8081"
 def FILE_PUBLISH = "packagePathPublish.7z"
-def publishWebDir = "C:\\Jenkins\\xxxxx\\subfolder"
+def publishWebDir = "C:\\Jenkins\\webtrading"
 
 node{		
 	stage("Checkout SCM"){
