@@ -55,11 +55,11 @@ node{
 	def remote = [:]
     remote.name = 'test'
     remote.host = '192.168.1.177'
-    remote.user = 'jenkins'
+    remote.user = 'root'
     remote.password = 'Nhim2023@'
     remote.allowAnyHosts = true
     stage('Remote SSH') {
-      //sshCommand remote: remote, command: "pwd"
+      sshCommand remote: remote, command: "pwd"
       sshCommand remote: remote, command: "ansible-playbook -i inventory.ini --extra-vars \"remote_dir='C:\Jenkins\xxxxx\subfolder' nexus_url='http://192.168.1.40:8081/repository/raw-it-vcbs-hosted/packagePathPublish.7z' nexus_user='jenkins' nexus_password='Nhim2023'\"  pull-file-nexus.yaml
 
   }
