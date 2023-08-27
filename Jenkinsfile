@@ -1,4 +1,5 @@
 def zipPath = "C:\\Program Files\\7-Zip\\7z.exe"
+def unZipPath = "C:\\Program Files (x86)\\WinRAR\\WinRAR.exe"
 def packagePathPublish = "C:\\IT-VCBS\\DOTNET45Publish\\"
 def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\pipelineTest"
 def MSBUILD = "\\MSBuild\\14.0\\Bin\\MSBuild.exe"
@@ -74,7 +75,7 @@ node{
 		bat """
 		cd /d ${publishWebDir}
 		dir
-		\"${zipPath}\" x ${FILE_PUBLISH} -o \"${publishWebDir}\" -y
+		\"${unZipPath}\" x -o+ ${FILE_PUBLISH} \"${publishWebDir}\"
 		"""	
 	}
 		
