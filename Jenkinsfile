@@ -59,9 +59,9 @@ node{
     remote.password = 'Nhim2023@'
     remote.allowAnyHosts = true
     stage('Remote SSH') {
-      sshCommand remote: remote, command: "pwd"
+      sshCommand remote: remote, command: "cd /home/root"
+	  sshCommand remote: remote, command: "pwd"
       sshCommand remote: remote, command: "sh pull_file_nexus.sh"
-	  echo ssh_command
   }
 		
 }
