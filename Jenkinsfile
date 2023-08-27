@@ -4,7 +4,7 @@ def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\pipelineTest"
 def MSBUILD = "\\MSBuild\\14.0\\Bin\\MSBuild.exe"
 def NEXUS_USER = "jenkins"
 def NEXUS_PASSWORD = "Nhim2023"
-def NEXUS_ADD =  "http://localhost:8081"
+def NEXUS_ADD =  "http://192.168.1.40:8081"
 def FILE_PUBLISH = "packagePathPublish.7z"
 
 node{		
@@ -51,7 +51,7 @@ node{
 		
 		"""		
 	} */
-	
+	def publishWebDir = 'C:\Jenkins\xxxxx\subfolder'
 	def remote = [:]
     remote.name = 'test'
     remote.host = '192.168.1.177'
@@ -61,9 +61,9 @@ node{
     stage('Remote SSH') {
       sshCommand remote: remote, command: """
 	  cd /home/root/
-      sh pull_file_nexus.sh
+      sh test.sh ${publishWebDir} ${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH} ${NEXUS_USER} ${NEXUS_PASSWORD}
 	  """
-      //sshCommand remote: remote, command: "sh pull_file_nexus.sh"
+      //sshCommand remote: remote, command: "sh test.sh ${publishWebDir} ${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH} ${NEXUS_USER} ${NEXUS_PASSWORD}"
   }
 		
 }
