@@ -51,7 +51,7 @@ node{
 		
 		"""		
 	} */
-	def remote_dir=
+	//def remote_dir=
 	def remote = [:]
     remote.name = 'test'
     remote.host = '192.168.1.177'
