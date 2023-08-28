@@ -98,7 +98,7 @@ node{
 	
 	stage ("Start Application"){
 		sshCommand remote: remote, command: """
-	    cd /home/root/
+	    cd /home/jenkins/
         ansible-playbook -i inventory.ini iis_start_application_pool.yaml
 	    """
 	}
