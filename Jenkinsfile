@@ -15,7 +15,7 @@ def remote = [:]
 node{
 
     remote.name = 'test'
-    remote.host = '192.168.1.177'
+    remote.host = '192.168.1.182'
     remote.user = 'root'
     remote.password = 'Nhim2023@'
     remote.allowAnyHosts = true
@@ -66,15 +66,23 @@ node{
 
     stage('Pull package from Nexus') {
       sshCommand remote: remote, command: """
-	  cd /home/root/
+	  cd /home/jenkins/
       ansible-playbook -i inventory.ini --extra-vars "remote_dir='${publishWebDir}' nexus_url='${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH}' nexus_user='${NEXUS_USER}' nexus_password='${NEXUS_PASSWORD}'"  pull-file-nexus.yaml
 	  """
       //sshCommand remote: remote, command: "sh test.sh ${publishWebDir} ${NEXUS_ADD}/repository/raw-it-vcbs-hosted/${FILE_PUBLISH} ${NEXUS_USER} ${NEXUS_PASSWORD}"
     }	
 	
+	
+	stage ("Backup application"){
+		sshCommand remote: remote, command: """
+	    cd /home/jenkins/
+        ansible-playbook -i inventory.ini --extra-vars "remote_dir='${publishWebDir}' backup_dir='${date}' " backup_publish_source.yaml
+	    """
+	}
+	
 	stage ("Stop Application"){
 		sshCommand remote: remote, command: """
-	    cd /home/root/
+	    cd /home/jenkins/
         ansible-playbook -i inventory.ini iis_stop_application_pool.yaml
 	    """
 	}
